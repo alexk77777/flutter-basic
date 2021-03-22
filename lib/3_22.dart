@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:io';
 
 void main() {
 //   int a = 10;
@@ -32,7 +33,7 @@ void main() {
 //
 //
 //   exam3();
-  dice();
+  fortuneTeller();
 }
 
 void exam1() {
@@ -78,4 +79,20 @@ void exam3() {
 void dice() {
   var rng = new Random();
   print(rng.nextInt(6)+1);
+}
+
+void fortuneTeller() {
+  print('점을 보세요!!!\n');
+  stdout.write("이름을 입력해 주세요\n");
+  var name = stdin.readLineSync();
+  stdout.write("나이를 입력해 주세요\n");
+  var ageString = stdin.readLineSync();
+  int age = int.parse(ageString);
+  Random rnn = new Random();
+  int fortune = rnn.nextInt(4)+1;;
+  stdout.write("점꽤가 나왔습니다\n\n\n\n");
+  stdout.write("$age 살의 $name 씨, 당신의 운세번호는 $fortune!!! 입니다\n");
+
+  stdout.write("(해석 1:대박 2:중박 3:보통 4:망)\n");
+
 }
