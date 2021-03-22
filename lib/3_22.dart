@@ -1,3 +1,5 @@
+import 'dart:math';
+
 void main() {
 //   int a = 10;
 //   int b = 20;
@@ -29,7 +31,8 @@ void main() {
 //   String nem3 = '';
 //
 //
-  exam2();
+//   exam3();
+  dice();
 }
 
 void exam1() {
@@ -56,9 +59,23 @@ void exam1() {
 }
 
 void exam2() {
-  print('asdf\n'*3);
+  print('asdf\n' * 3);
+  print('asdf\n' * 3);
+  print('asdf\n' * 3);
+  print('asdf\n' * 3);
+}
 
+void exam3() {
+  var names = ['한석봉', '신사임당', '이순신'];
+  // for (var name in names) {
+  //   print('내 이름은 $name 입니다');
+  // }
+  for (int num = 1; num < 3; num++) {
+    print('내 이름은 한석봉 입니다');
+  }
+}
 
-
-
+void dice() {
+  var rng = new Random();
+  print(rng.nextInt(6)+1);
 }
