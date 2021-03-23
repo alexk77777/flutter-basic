@@ -94,3 +94,4 @@ void fortuneTeller() {
   stdout.write("$age 살의 $name 씨, 당신의 운세번호는 $fortune!!! 입니다\n");
   stdout.write("(해석 1:대박 2:중박 3:보통 4:망)\n");
 }
+
