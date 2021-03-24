@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'dart:io';
 
+
 //
 // void main() {
 //   quiz1();
@@ -86,14 +87,13 @@ import 'dart:io';
 // }
 
 void main() {
-  // introduceOneself();
-  // eMail(
-  //     title: 'term of purchase',
-  //     address: 'misas@naver.com',
-  //     text: 'i want to purchase your product');
-  // eMail(
-  //     address: 'misas@naver.com',
-  //     text: 'i want to purchase your product');
+  introduceOneself();
+  mail('term of purchase',
+      'misas@naver.com',
+      'i want to purchase your product. blah blah blah');
+  eMail(
+      address: 'misas@naver.com',
+      text: 'i want to purchase your product. blah blah blah');
   print('삼각형 면적 = ${calcTriangleArea(bottom: 5.0, height: 2.0)}');
   print('원 면적 = ${calcCircleArea(radius: 4.0)}');
 }
@@ -107,7 +107,11 @@ void introduceOneself() {
       '안녕하세요 제 이름은 $name 입니다.\n나이는 $age이고요.\n키는 $height cm 입니다.\n성별은 $gender 입니다');
 }
 
-String eMail({String title, String address, String text}) {
+void mail(String title, String address, String text) {
+  print('$address에 아래의 메일을 송신한다.\n제목 : $title\n본문 : $text');
+}
+
+void eMail({String title, String address, String text}) {
   if (title == null) {
     print('$address에 아래의 메일을 송신한다.\n제목 : 제목없음\n본문 : $text');
   } else {

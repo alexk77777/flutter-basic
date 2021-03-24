@@ -17,6 +17,8 @@ int dice({int start, int end}) {
   return Random().nextInt(end - start + 1) + start;
 }
 
+
+
 // 함수의 내용이 한 줄일 경우에는 다음과 같이 줄여서 쓸 수 있다. (람다식 lambda expression)
 // num : 파라미터, parameter, 매개변수
 int dice2(int num) => Random().nextInt(num) + 1;
