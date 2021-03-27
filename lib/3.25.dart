@@ -1,5 +1,5 @@
-import 'dart:io';
-import 'dart:math';
+import 'package:flutter_app_20210317/character/cleric.dart';
+import 'package:flutter_app_20210317/character/hero.dart';
 
 // void main() {
 //   Hero hero1 = Hero(); // 인스턴트 형성
@@ -13,8 +13,8 @@ import 'dart:math';
 //   hero1.attack();
 //   print(hero1.name);
 // }
-//
-// //Hero 타입을 새로 작성,
+
+//Hero 타입을 새로 작성,
 // class Hero {
 //   //필드(field) 또는 전역변수(global variable)라 부르는 영역
 //   String name;
@@ -28,51 +28,51 @@ import 'dart:math';
 //   }
 // }
 
-void main() {
-  Cleric cleric1 = Cleric();
-  cleric1.name = "alex";
-  cleric1.hp = 15;
-  cleric1.mp = 8;
+// void main() {
+//   Cleric cleric1 = Cleric();
+//   cleric1.name = "alex";
+//   cleric1.hp = 15;
+//   cleric1.mp = 8;
+//
+//   print("전투가 진행되었다!");
+//   print("전투 후 selfAid 스펠 주문전 HP = ${cleric1.hp}/50");
+//   print("전투 후 selfAid 스펠 주문전 MP = ${cleric1.mp}/10");
+//   cleric1.selfAid();
+//   print("selfAid 스펠 주문후 HP = ${cleric1.hp}/50");
+//   print("selfAid 스펠 주문후 MP = ${cleric1.mp}/10");
+//   print(
+//       "현재 MP는 ${cleric1.mp}/10 이기 때문에 실제회복된 MP = ${cleric1.pray(8)}\n최종 HP = HP = ${cleric1.hp}/50 \n최종 MP = ${cleric1.mp}/10");
+// }
 
-  print("전투가 진행되었다!");
-  print("전투 후 selfAid 스펠 주문전 HP = ${cleric1.hp}/50");
-  print("전투 후 selfAid 스펠 주문전 MP = ${cleric1.mp}/10");
-  cleric1.selfAid();
-  print("selfAid 스펠 주문후 HP = ${cleric1.hp}/50");
-  print("selfAid 스펠 주문후 MP = ${cleric1.mp}/10");
-  print(
-      "현재 MP는 ${cleric1.mp}/10 이기 때문에 실제회복된 MP = ${cleric1.pray(8)}\n최종 HP = HP = ${cleric1.hp}/50 \n최종 MP = ${cleric1.mp}/10");
-}
-
-class Cleric {
-  String name;
-  int hp = 50;
-  final int maxHp = 50;
-  int mp = 10;
-  final int maxMp = 10;
-
-  void selfAid() {
-    mp = mp - 5;
-    hp = maxHp;
-  }
-
-  int pray(int time) {
-    Random rnn = new Random();
-    int bonus = rnn.nextInt(3);
-    int recoveryMp = time + bonus;
-    print('기도한 시간 = $time초');
-    print('보너스 MP = $bonus');
-    print('원래 회복되어야하는 MP = $recoveryMp');
-
-    if (maxMp <= recoveryMp + mp) {
-      recoveryMp = maxMp - mp;
-      mp = maxMp;
-    } else {
-      mp = mp + recoveryMp;
-    }
-    return recoveryMp;
-  }
-}
+// class Cleric {
+//   String name;
+//   int hp = 50;
+//   final int maxHp = 50;
+//   int mp = 10;
+//   final int maxMp = 10;
+//
+//   void selfAid() {
+//     mp = mp - 5;
+//     hp = maxHp;
+//   }
+//
+//   int pray(int time) {
+//     Random rnn = new Random();
+//     int bonus = rnn.nextInt(3);
+//     int recoveryMp = time + bonus;
+//     print('기도한 시간 = $time초');
+//     print('보너스 MP = $bonus');
+//     print('원래 회복되어야하는 MP = $recoveryMp');
+//
+//     if (maxMp <= recoveryMp + mp) {
+//       recoveryMp = maxMp - mp;
+//       mp = maxMp;
+//     } else {
+//       mp = mp + recoveryMp;
+//     }
+//     return recoveryMp;
+//   }
+// }
 
 // // 교수님 Cleric
 //
@@ -104,4 +104,3 @@ class Cleric {
 //     return recoverMp;
 //   }
 // }
-
