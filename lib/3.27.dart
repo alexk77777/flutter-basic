@@ -1,16 +1,24 @@
-class Person {
+class Cleria{
+  static final int maxHp = 50;
+  static final int maxMp = 10;
+  int hp;
+  int mp;
   String name;
-  int _age;
 
-  void addOneYear() {
-    _age++;
-  }
+  Cleria({this.name, this.hp, this.mp});
 }
 
 void main() {
-  var person = new Person();
-  person._age = 10;
-  person.addOneYear();
+  Cleria cleria1 = new Cleria();
+  Cleria cleria2 = new Cleria(name: "아서", hp: 40, mp: 5);
 
-  print(person._age);
+  // print(Cleria.maxMp);
+  // print(Cleria().hp);
+  // cleria1.hp=35;
+  // print(cleria1.hp);
+  //
+  // print(Cleria().hp);
+  // print(cleria2.hp);
+  // cleria2.hp=35;
+  // print(cleria2.hp);
 }
