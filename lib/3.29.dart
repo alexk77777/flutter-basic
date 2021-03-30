@@ -40,54 +40,100 @@
 //   print(str2.startsWith('ab')); // true
 //
 //   print(str2.endsWith('d')); // true
+
 //   // c가 몇번째 있을까?
 //   print(str2.indexOf('c')); //2
+
 //   print(str2.trim()); // 좌우 공백 제거
 // }
 
-//quiz
+//quiz1
+// void main() {
+//   Word word = Word('avalance');
+//   print(word.isVowel(4));
+//   print(word.isConsonant(4));
+//   print(word.isConsonant1(5));
+// }
+//
+// class Word {
+//   String letters;
+//
+//   Word(this.letters);
+//
+//   List<String> judgeVowel = ['a', 'i', 'u', 'e', 'o', 'A', 'I', 'U', 'E', 'O'];
+//
+//   // i번째 글자가 모음이면 true  // a, i, u, e, o
+//   bool isVowel(int i) {
+//     // contains의 내용을 읽어보면 bool임. 그건 true or false 임. null 없음
+//     return judgeVowel.contains(letters.substring(i - 1, i));
+//
+//     // if (judgeVowel.contains(letters.substring(i - 1, i))) {
+//     //   return true;
+//     // } else {
+//     //   return false;
+//     // }
+//   }
+//
+//   bool isVowel2(int i ){
+//     return 'aeiou'.contains(letters.substring(i-1,i).toLowerCase());
+//   }
+//   bool isConsonant1(int i) => !'aeiou'.contains(letters.substring(i-1,i).toLowerCase());
+//
+//   bool isConsonant2(int i) => !isVowel(i);
+//
+//
+// // i번째 글자가 자음이면 true
+//   bool isConsonant(int i) {
+//     if (judgeVowel.contains(letters.substring(i - 1, i))) {
+//       return false;
+//     } else {
+//       return true;
+//     }
+//   }
+// }
+
+//quiz2
+
 void main() {
-  Word word = Word('avalance');
-  print(word.isVowel(4));
-  print(word.isConsonant(4));
+  Word dish = Word('dish');
+  print(dish.toPlural());
+
+  Word cherry = Word('cherry');
+  print(cherry.toPlural());
+
+  Word clock = Word('clock');
+  print(clock.toPlural());
+
+  print(clock.toPlural());
 }
 
 class Word {
   String letters;
-
   Word(this.letters);
 
-  List<String> judgeVowel = ['a', 'i', 'u', 'e', 'o', 'A', 'I', 'U', 'E', 'O'];
+  String toPlural() {
 
-  // i번째 글자가 모음이면 true  // a, i, u, e, o
-  bool isVowel(int i) {
-    // if (letters.substring(i - 1, i) == 'a' ||
-    //     letters.substring(i - 1, i) == 'i' ||
-    //     letters.substring(i - 1, i) == 'u' ||
-    //     letters.substring(i - 1, i) == 'e' ||
-    //     letters.substring(i - 1, i) == 'o' ||
-    //     letters.substring(i - 1, i) == 'A' ||
-    //     letters.substring(i - 1, i) == 'I' ||
-    //     letters.substring(i - 1, i) == 'U' ||
-    //     letters.substring(i - 1, i) == 'E' ||
-    //     letters.substring(i - 1, i) == 'O') {
-    //   return true;
-    // } else {
-    //   return false;
-    // }
-    if (judgeVowel.contains(letters.substring(i - 1, i))) {
-      return true;
-    } else {
-      return false;
-    }
-  }
+    var letters = this.letters;
+    List<String> pluralRuleList1 = ['s', 'x', 'ch', 'sh', 'o'];
+    // List<String> pluralRuleList2 = ['f', 'fe'];
+    // List<String> pluralRuleList3 = ['y'];
 
-// i번째 글자가 자음이면 true
-  bool isConsonant(int i) {
-    if (judgeVowel.contains(letters.substring(i - 1, i))) {
-      return false;
-    } else {
-      return true;
+    for (int i = 0; i < pluralRuleList1.length; i++) {
+      if (letters.endsWith(pluralRuleList1[i])) {
+        letters = letters + 'es';
+      }
     }
+    if (letters.endsWith('f')) {
+      letters = letters.replaceAll('f', 'ves');
+    } else if (letters.endsWith('fe')) {
+      letters = letters.replaceAll('fe', 'ves');
+    } else if (letters.endsWith('y') &&
+        !'aiueo'.contains(
+            letters.substring(letters.length - 2, letters.length - 1))) {
+      letters = letters.replaceAll('y', 'ies');
+    } else {
+      letters = letters + 's';
+    }
+    return letters;
   }
 }
