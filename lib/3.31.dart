@@ -83,62 +83,178 @@ import 'dart:math';
 //     // 시끄러운지 판단해서 출력
 //   }
 // }
-//quiz1-way4(교수님 방법)
+// //quiz1-way4(교수님 방법)
+// void main() {
+//   List<String> inputLine = stdin.readLineSync().split(' ');
+//   int a = int.parse(inputLine[0]);
+//   int b = int.parse(inputLine[1]);
+//   int R = int.parse(inputLine[2]);
+//
+//   Gongsajang gongsajang = Gongsajang(a, b, R);
+//
+//   Park park = Park();
+//   int N = int.parse(stdin.readLineSync());
+//   for (int i = 0; i < N; i++) {
+//     List<String> inputLine = stdin.readLineSync().split(' ');
+//     int x = int.parse(inputLine[0]);
+//     int y = int.parse(inputLine[1]);
+//     // 나무를 생성
+//     // 시끄러운지 판단해서 출력
+//     Tree tree = Tree(x, y);
+//     park.trees.add(tree);
+//   }
+//   // print
+//   for (Tree tree in park.trees) {
+//     if (gongsajang.isNoisy(tree)) {
+//       print('noisy');
+//     } else {
+//       print('silent');
+//     }
+//   }
+// }
+// class Tree {
+//   int x;
+//   int y;
+//   Tree(this.x, this.y);
+// }
+// class Gongsajang {
+//   int a;
+//   int b;
+//   int R;
+//   Gongsajang(this.a, this.b, this.R);
+//   bool isNoisy(Tree tree) {
+//     if ((tree.x - a) * (tree.x - a) + (tree.y - b) * (tree.y - b) >= R * R) {
+//       return false;
+//     }
+//     return true;
+//   }
+// }
+// class Park {
+//   List<Tree> trees = [];
+// }
+
 void main() {
-  List<String> inputLine = stdin.readLineSync().split(' ');
-  int a = int.parse(inputLine[0]);
-  int b = int.parse(inputLine[1]);
-  int R = int.parse(inputLine[2]);
-  Gongsajang gongsajang = Gongsajang(a, b, R);
-  Park park = Park();
+  List<String> input = stdin.readLineSync().split(' ');
+  int position1 = int.parse(input[0]);
+  int position2 = int.parse(input[1]);
+  int position3 = int.parse(input[2]);
+
+  Gongsajang gongsajang = Gongsajang();
+
+  gongsajang.a = position1;
+  gongsajang.b = position2;
+  gongsajang.R = position3;
+
   int N = int.parse(stdin.readLineSync());
+
+  Tree tree = Tree();
+  Park park = Park();
+
   for (int i = 0; i < N; i++) {
-    List<String> inputLine = stdin.readLineSync().split(' ');
-    int x = int.parse(inputLine[0]);
-    int y = int.parse(inputLine[1]);
-    // 나무를 생성
-    // 시끄러운지 판단해서 출력
-    Tree tree = Tree(x, y);
-    park.trees.add(tree);
-  }
-  // print
-  for (Tree tree in park.trees) {
-    if (gongsajang.isNoisy(tree)) {
+    List<String> input = stdin.readLineSync().split(' ');
+    int x = int.parse(input[0]);
+    int y = int.parse(input[1]);
+    tree.x = x;
+    tree.y = y;
+
+    park.treePosition.add('${tree.x} ,${tree.y}');
+
+    if (gongsajang.judge(tree) == true) {
       print('noisy');
     } else {
       print('silent');
     }
   }
+  print(park.treePosition);
 }
+
 class Tree {
   int x;
   int y;
-  Tree(this.x, this.y);
 }
+
 class Gongsajang {
   int a;
   int b;
   int R;
-  Gongsajang(this.a, this.b, this.R);
-  bool isNoisy(Tree tree) {
-    if ((tree.x - a) * (tree.x - a) + (tree.y - b) * (tree.y - b) >= R * R) {
+
+  bool judge(Tree tree) {
+    if (pow(tree.x - a, 2) + pow(tree.y - b, 2) >= R * R) {
       return false;
     }
     return true;
   }
 }
+
 class Park {
-  List<Tree> trees = [];
+  List<String> treePosition =[];
 }
 
+// //quiz1-way4(교수님 주신 문제)
+// void main() {
+//   List<String> inputLine = stdin.readLineSync().split(' ');
+//   int a = int.parse(inputLine[0]);
+//   int b = int.parse(inputLine[1]);
+//   int R = int.parse(inputLine[2]);
+//   int N = int.parse(stdin.readLineSync());
+//   // 공원 생성
+//   // 공사장을 공원에 셋팅
+//   for (int i = 0; i < N; i++) {
+//     List<String> inputLine = stdin.readLineSync().split(' ');
+//     int x = int.parse(inputLine[0]);
+//     int y = int.parse(inputLine[1]);
+//     Tree tree = Tree(x, y);
+//     // 나무를 생성
+//   }
+//   // 시끄러운지 판단해서 출력
+// }
+// class Tree {
+//   int x;
+//   int y;
+//
+// }
+//
+// class Gongsajang {
+//   int x;
+//   int y;
+//   int R;
+//   Gongsajang(this.x, this.y, this.R);
+//   bool isNoisy(Tree tree) {
+//   }
+// }
+// class Park {
+//   Gongsajang gongsajang;
+//   List<Tree> trees = [];
+//   Park(this.gongsajang);
+// }
 
+//
+// void main() {
+//   // Exam exam = Exam();    // exam 이라는 인스턴스 생성
+//   // exam.solution();       // 메소드를 불러와서 쓸 수 있음
+//   // int a=36;
+//   Exam exam2 = Exam();
+//   print(exam2.x);
+// }
+//
+// class Exam{              //Exam 이라는 class 정의
+//   int x;
+//   Exam(this.x);
+//
+//   // int solution(){        //solution 이라는 메소드(methods) 정의
+//   //   var result;          //return 시킬 변수 result 정의(필수사항 아님)
+//   //
+//   //           //메소드의 역할(논리) 정의
+//   //
+//   //   return result;       //메소드의 리턴값(result를 안쓸 수도 있음)
+//   }
+//
 
 // 20 10 10
 // 3
 // 25 10
 // 20 15
 // 70 70
-
 
 // //quiz1-way4
 // void main() {
