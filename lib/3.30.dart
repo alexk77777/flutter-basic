@@ -63,26 +63,26 @@ import 'dart:math';
 //   }
 // }
 
-//quiz5
-void main() {
-  List<String> inputs = ['JAVA', 'JINO','a','b'];
-  Exam exam = Exam();
-  print(exam.solution(inputs));
-}
-
-class Exam {
-  String solution(List<String> list) {
-    String result = '';
-    for (int i = 0; i < list.length; i++) {
-      if (i<list.length-1) {
-        result += list[i] + ', ';
-      } else{
-        result += list[i] + '.';
-      }
-    }
-    return 'Hello ' + result;
-  }
-}
+// //quiz5
+// void main() {
+//   List<String> inputs = ['JAVA', 'JINO','a','b'];
+//   Exam exam = Exam();
+//   print(exam.solution(inputs));
+// }
+//
+// class Exam {
+//   String solution(List<String> list) {
+//     String result = '';
+//     for (int i = 0; i < list.length; i++) {
+//       if (i<list.length-1) {
+//         result += list[i] + ', ';
+//       } else{
+//         result += list[i] + '.';
+//       }
+//     }
+//     return 'Hello ' + result;
+//   }
+// }
 //
 // //quiz6
 // void main() {
@@ -92,11 +92,11 @@ class Exam {
 //
 // class Exam {
 //   String solution(int a, int b) {
-//     int start = a;
+//     int addNum = a;
 //     var result = a.toString() + " ";
 //     for (int i = 0; i < 9; i++) {
-//       start += b;
-//       result += start.toString() + " ";
+//       addNum += b;
+//       result += addNum.toString() + " ";
 //     }
 //     return result;
 //   }
@@ -125,7 +125,7 @@ class Exam {
 //   }
 // }
 
-// // quiz8
+// // quiz8- way1
 // void main() {
 //   Exam exam = Exam();
 //   print(exam.solution('C'));
@@ -139,6 +139,13 @@ class Exam {
 //   }
 // }
 
+// // quiz8-way2(교수님)
+// class Exam {
+//   int solution(String alphabet) {
+//     return 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.indexOf(alphabet) + 1;
+//   }
+// }
+
 
 // //quiz9
 // void main() {
@@ -149,14 +156,15 @@ class Exam {
 //
 // class Exam {
 //   int solution(int a) {
-//     int result=0;
-//     if(a<0){
-//       result = a*-1;
-//     }else{result=a;}
+//     int result = 0;
+//     if (a < 0) {
+//       result = a * -1;
+//     } else {
+//       result = a;
+//     }
 //     return result;
 //   }
 // }
-
 
 // // quiz10
 // void main() {
@@ -173,4 +181,3 @@ class Exam {
 //     return result;
 //     }
 //   }
-
