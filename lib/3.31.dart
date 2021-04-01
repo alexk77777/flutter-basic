@@ -133,73 +133,15 @@ import 'dart:math';
 //   List<Tree> trees = [];
 // }
 
-void main() {
-  List<String> input = stdin.readLineSync().split(' ');
-  int position1 = int.parse(input[0]);
-  int position2 = int.parse(input[1]);
-  int position3 = int.parse(input[2]);
-
-  // Gongsajang gongsajang = Gongsajang();
-  Gongsajang gongsajang = Gongsajang(position1, position2, position3);
-
-  int N = int.parse(stdin.readLineSync());
-  // Tree tree = Tree();
-  Park park = Park();
-
-  for (int i = 0; i < N; i++) {
-    List<String> input = stdin.readLineSync().split(' ');
-    int x = int.parse(input[0]);
-    int y = int.parse(input[1]);
-
-    Tree tree = Tree(x, y);
-    park.treePosition.add(tree);
-    // tree.x = x;
-    // tree.y = y;
-
-    // park.treePosition.add();
-    // '${tree.x} ,${tree.y}'
-  }
-    for (Tree trees in park.treePosition) {
-      if (gongsajang.judge(trees) == true) {
-        print('noisy');
-      } else {
-        print('silent');
-      }
-    }
+// //quiz1-way4(연습장)
 
 
-  //   if (gongsajang.judge(tree) == true) {
-  //     print('noisy');
-  //   } else {
-  //     print('silent');
-  //   }
-  // }
-  // print(park.treePosition);
-}
 
-class Tree {
-  int x;
-  int y;
-  Tree(this.x, this.y);
-}
 
-class Gongsajang {
-  int a;
-  int b;
-  int R;
-  Gongsajang(this.a, this.b, this.R);
 
-  bool judge(Tree tree) {
-    if (pow(tree.x - a, 2) + pow(tree.y - b, 2) >= R * R) {
-      return false;
-    }
-    return true;
-  }
-}
 
-class Park {
-  List<Tree> treePosition =[];
-}
+
+
 
 // //quiz1-way4(교수님 주신 문제)
 // void main() {
