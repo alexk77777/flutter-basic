@@ -139,44 +139,55 @@ void main() {
   int position2 = int.parse(input[1]);
   int position3 = int.parse(input[2]);
 
-  Gongsajang gongsajang = Gongsajang();
-
-  gongsajang.a = position1;
-  gongsajang.b = position2;
-  gongsajang.R = position3;
+  // Gongsajang gongsajang = Gongsajang();
+  Gongsajang gongsajang = Gongsajang(position1, position2, position3);
 
   int N = int.parse(stdin.readLineSync());
-
-  Tree tree = Tree();
+  // Tree tree = Tree();
   Park park = Park();
 
   for (int i = 0; i < N; i++) {
     List<String> input = stdin.readLineSync().split(' ');
     int x = int.parse(input[0]);
     int y = int.parse(input[1]);
-    tree.x = x;
-    tree.y = y;
 
-    park.treePosition.add('${tree.x} ,${tree.y}');
+    Tree tree = Tree(x, y);
+    park.treePosition.add(tree);
+    // tree.x = x;
+    // tree.y = y;
 
-    if (gongsajang.judge(tree) == true) {
-      print('noisy');
-    } else {
-      print('silent');
-    }
+    // park.treePosition.add();
+    // '${tree.x} ,${tree.y}'
   }
-  print(park.treePosition);
+    for (Tree trees in park.treePosition) {
+      if (gongsajang.judge(trees) == true) {
+        print('noisy');
+      } else {
+        print('silent');
+      }
+    }
+
+
+  //   if (gongsajang.judge(tree) == true) {
+  //     print('noisy');
+  //   } else {
+  //     print('silent');
+  //   }
+  // }
+  // print(park.treePosition);
 }
 
 class Tree {
   int x;
   int y;
+  Tree(this.x, this.y);
 }
 
 class Gongsajang {
   int a;
   int b;
   int R;
+  Gongsajang(this.a, this.b, this.R);
 
   bool judge(Tree tree) {
     if (pow(tree.x - a, 2) + pow(tree.y - b, 2) >= R * R) {
@@ -187,7 +198,7 @@ class Gongsajang {
 }
 
 class Park {
-  List<String> treePosition =[];
+  List<Tree> treePosition =[];
 }
 
 // //quiz1-way4(교수님 주신 문제)
