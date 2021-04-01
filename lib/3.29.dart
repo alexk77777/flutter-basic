@@ -24,27 +24,27 @@
 //   print(str.substring(1, 2));
 //   print(str + 'hijk');
 //   print('${str}hijk');
-//
-//   // 메소드에 리턴값이 있다면
-//   String str2 = '';
-//   print(str2.isEmpty);
-//   print(str2.length == 0);
-//   print(str2.isNotEmpty);
-//   print(str.contains('d'));
-//   print(str.toLowerCase());
-//   print(str.toUpperCase());
-//
-//   print(str.replaceAll('a', 'A')); //Abcd
-//   print(str.replaceAll('ab', 'ZZ')); //ZZcd
-//
-//   print(str2.startsWith('ab')); // true
-//
-//   print(str2.endsWith('d')); // true
+//   //
+  // // 메소드에 리턴값이 있다면
+  // String str2 = '';
+  // print(str2.isEmpty);
+  // print(str2.length == 0);
+  // print(str2.isNotEmpty);
+  // print(str.contains('d'));
+  // print(str.toLowerCase());
+  // print(str.toUpperCase());
 
-//   // c가 몇번째 있을까?
-//   print(str2.indexOf('c')); //2
-
-//   print(str2.trim()); // 좌우 공백 제거
+  // print(str.replaceAll('a', 'A')); //Abcd
+  // print(str.replaceAll('ab', 'ZZ')); //ZZcd
+  //
+  // print(str2.startsWith('ab')); // true
+  //
+  // print(str2.endsWith('d')); // true
+  //
+  // // c가 몇번째 있을까?
+  // print(str2.indexOf('c')); //2
+  //
+  // print(str2.trim()); // 좌우 공백 제거
 // }
 
 //quiz1
@@ -92,48 +92,48 @@
 //   }
 // }
 
-//quiz2
-
-void main() {
-  Word dish = Word('dish');
-  print(dish.toPlural());
-
-  Word cherry = Word('cherry');
-  print(cherry.toPlural());
-
-  Word clock = Word('clock');
-  print(clock.toPlural());
-
-  print(clock.toPlural());
-}
-
-class Word {
-  String letters;
-  Word(this.letters);
-
-  String toPlural() {
-
-    var letters = this.letters;
-    List<String> pluralRuleList1 = ['s', 'x', 'ch', 'sh', 'o'];
-    // List<String> pluralRuleList2 = ['f', 'fe'];
-    // List<String> pluralRuleList3 = ['y'];
-
-    for (int i = 0; i < pluralRuleList1.length; i++) {
-      if (letters.endsWith(pluralRuleList1[i])) {
-        letters = letters + 'es';
-      }
-    }
-    if (letters.endsWith('f')) {
-      letters = letters.replaceAll('f', 'ves');
-    } else if (letters.endsWith('fe')) {
-      letters = letters.replaceAll('fe', 'ves');
-    } else if (letters.endsWith('y') &&
-        !'aiueo'.contains(
-            letters.substring(letters.length - 2, letters.length - 1))) {
-      letters = letters.replaceAll('y', 'ies');
-    } else {
-      letters = letters + 's';
-    }
-    return letters;
-  }
-}
+// //quiz2
+//
+// void main() {
+//   Word dish = Word('dish');
+//   print(dish.toPlural());
+//
+//   Word cherry = Word('cherry');
+//   print(cherry.toPlural());
+//
+//   Word clock = Word('clock');
+//   print(clock.toPlural());
+//
+//   print(clock.toPlural());
+// }
+//
+// class Word {
+//   String letters;
+//   Word(this.letters);
+//
+//   String toPlural() {
+//
+//     var letters = this.letters;
+//     List<String> pluralRuleList1 = ['s', 'x', 'ch', 'sh', 'o'];
+//     // List<String> pluralRuleList2 = ['f', 'fe'];
+//     // List<String> pluralRuleList3 = ['y'];
+//
+//     for (int i = 0; i < pluralRuleList1.length; i++) {
+//       if (letters.endsWith(pluralRuleList1[i])) {
+//         letters = letters + 'es';
+//       }
+//     }
+//     if (letters.endsWith('f')) {
+//       letters = letters.replaceAll('f', 'ves');
+//     } else if (letters.endsWith('fe')) {
+//       letters = letters.replaceAll('fe', 'ves');
+//     } else if (letters.endsWith('y') &&
+//         !'aiueo'.contains(
+//             letters.substring(letters.length - 2, letters.length - 1))) {
+//       letters = letters.replaceAll('y', 'ies');
+//     } else {
+//       letters = letters + 's';
+//     }
+//     return letters;
+//   }
+// }
