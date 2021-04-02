@@ -22,7 +22,7 @@ import 'dart:io';
 //
 //   print("$sum, $avg");
 // }
-//
+// //
 // int total(List<num> scores) {
 //   int summary = 0;
 //   for (int i = 0; i < 10; i++) {
@@ -48,10 +48,10 @@ import 'dart:io';
 //   print(scores);
 // }
 
-void main() {
-  List<int> numbers = [3, 4, 9];
-  print('한자리의 숫자를 입력해 주세요');
-  int input = int.parse(stdin.readLineSync());
+// void main() {
+//   List<int> numbers = [3, 4, 9];
+//   print('한자리의 숫자를 입력해 주세요');
+//   int input = int.parse(stdin.readLineSync());
 
   // //방법 1
   // for (int i = 0; i < numbers.length; ++i) {
@@ -80,6 +80,6 @@ void main() {
   // }
 
   //방법 4(3항 연산)
-  print(numbers.contains(input)? '정답': '오답');
-
-}
+//   print(numbers.contains(input)? '정답': '오답');
+//
+// }

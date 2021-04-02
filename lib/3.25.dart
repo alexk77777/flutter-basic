@@ -13,8 +13,8 @@ import 'package:flutter_app_20210317/character/hero.dart';
 //   hero1.attack();
 //   print(hero1.name);
 // }
-
-//Hero 타입을 새로 작성,
+//
+// // Hero 타입을 새로 작성,
 // class Hero {
 //   //필드(field) 또는 전역변수(global variable)라 부르는 영역
 //   String name;
@@ -27,12 +27,12 @@ import 'package:flutter_app_20210317/character/hero.dart';
 //     print("공격 + $hp");
 //   }
 // }
-
+// import 'dart:math';
 // void main() {
 //   Cleric cleric1 = Cleric();
 //   cleric1.name = "alex";
 //   cleric1.hp = 15;
-//   cleric1.mp = 8;
+//   cleric1.mp = 3;
 //
 //   print("전투가 진행되었다!");
 //   print("전투 후 selfAid 스펠 주문전 HP = ${cleric1.hp}/50");

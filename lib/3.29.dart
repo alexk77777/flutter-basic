@@ -25,29 +25,29 @@
 //   print(str + 'hijk');
 //   print('${str}hijk');
 //   //
-  // // 메소드에 리턴값이 있다면
-  // String str2 = '';
-  // print(str2.isEmpty);
-  // print(str2.length == 0);
-  // print(str2.isNotEmpty);
-  // print(str.contains('d'));
-  // print(str.toLowerCase());
-  // print(str.toUpperCase());
-
-  // print(str.replaceAll('a', 'A')); //Abcd
-  // print(str.replaceAll('ab', 'ZZ')); //ZZcd
-  //
-  // print(str2.startsWith('ab')); // true
-  //
-  // print(str2.endsWith('d')); // true
-  //
-  // // c가 몇번째 있을까?
-  // print(str2.indexOf('c')); //2
-  //
-  // print(str2.trim()); // 좌우 공백 제거
+//   // 메소드에 리턴값이 있다면
+//   String str2 = '';
+//   print(str2.isEmpty);
+//   print(str2.length == 0);
+//   print(str2.isNotEmpty);
+//   print(str.contains('d'));
+//   print(str.toLowerCase());
+//   print(str.toUpperCase());
+//
+//   print(str.replaceAll('a', 'A')); //Abcd
+//   print(str.replaceAll('ab', 'ZZ')); //ZZcd
+//
+//   print(str2.startsWith('ab')); // true
+//
+//   print(str2.endsWith('d')); // true
+//
+//   // c가 몇번째 있을까?
+//   print(str2.indexOf('c')); //2
+//
+//   print(str2.trim()); // 좌우 공백 제거
 // }
 
-//quiz1
+// //quiz1
 // void main() {
 //   Word word = Word('avalance');
 //   print(word.isVowel(4));
@@ -57,9 +57,7 @@
 //
 // class Word {
 //   String letters;
-//
 //   Word(this.letters);
-//
 //   List<String> judgeVowel = ['a', 'i', 'u', 'e', 'o', 'A', 'I', 'U', 'E', 'O'];
 //
 //   // i번째 글자가 모음이면 true  // a, i, u, e, o
@@ -74,13 +72,14 @@
 //     // }
 //   }
 //
-//   bool isVowel2(int i ){
-//     return 'aeiou'.contains(letters.substring(i-1,i).toLowerCase());
+//   bool isVowel2(int i) {
+//     return 'aeiou'.contains(letters.substring(i - 1, i).toLowerCase());
 //   }
-//   bool isConsonant1(int i) => !'aeiou'.contains(letters.substring(i-1,i).toLowerCase());
+//
+//   bool isConsonant1(int i) =>
+//       !'aeiou'.contains(letters.substring(i - 1, i).toLowerCase());
 //
 //   bool isConsonant2(int i) => !isVowel(i);
-//
 //
 // // i번째 글자가 자음이면 true
 //   bool isConsonant(int i) {
@@ -112,7 +111,6 @@
 //   Word(this.letters);
 //
 //   String toPlural() {
-//
 //     var letters = this.letters;
 //     List<String> pluralRuleList1 = ['s', 'x', 'ch', 'sh', 'o'];
 //     // List<String> pluralRuleList2 = ['f', 'fe'];
@@ -136,4 +134,52 @@
 //     }
 //     return letters;
 //   }
+// }
+//
+//
+// bool isVowel(int i) {
+//   List<String> str = ['a', 'i', 'u', 'e', 'o', 'A', 'I', 'U', 'E', 'O'];
+//   String ch = letters.substring(i, i + 1);
+//   bool result = false;
+//   for (var i = 0; i < str.length; i++) {
+//     if(ch == str[i]) {
+//       result = true;
+//       break;
+//     }
+//   }
+//   return result;
+// }
+
+
+// List<String> es = ['o', 's', 'x', 'ch', 'sh'];
+//
+// for (int i = 0;i<es.length; i++) {
+// bool isLast1 = es[i] == letters.substring(letters.length - 1, letters.length);
+// bool isLast2 = es.elementAt(i) == letters.substring(letters.length - 2, letters.length);
+// if (isLast1 || isLast2) {
+// return letters + 'es';
+// }
+// }
+//
+//
+// String toPlural() {
+//   String result = '${letters}s';
+//   // s, x, ch, sh : -es
+//   if (letters.endsWith('s') ||
+//       letters.endsWith('x') ||
+//       letters.endsWith('ch') ||
+//       letters.endsWith('sh') ||
+//       letters.endsWith('o')) {
+//     result = '${letters}es';
+//   } else if (letters.endsWith('f')) {
+//     // f -> ves
+//     result = '${letters.substring(0, letters.length - 1)}ves';
+//   } else if (letters.endsWith('fe')) {
+//     // fe -> ves
+//     result = '${letters.substring(0, letters.length - 2)}ves';
+//   } else if (isConsonant(letters.length - 2) && letters.endsWith('y')) {
+//     // 자음 + y : y -> ies
+//     result = '${letters.substring(0, letters.length - 1)}ies';
+//   }
+//   return result;
 // }
