@@ -7,7 +7,7 @@ import 'dart:io';
 //   int N = int.parse(inputNumber[0]);
 //   int M = int.parse(inputNumber[1]);
 //
-//   if (N % 2 == 0 && M % 2 == 0) {
+//   if((N % 2 == 0 && M % 2 == 0) ||(N.isOdd && M.isOdd)){
 //     print('NO');
 //   } else {
 //     print('YES');
@@ -21,17 +21,27 @@ import 'dart:io';
 //   int N = int.parse(inputNumber[0]);
 //   int M = int.parse(inputNumber[1]);
 //
-//   int result = N;
-//   List<int> resultList = [N];
-//   for (int i = 0; i < 9; i++) {
-//     result += M;
-//     resultList.add(result);
+//
+//   String stringResult = '';
+//   for (int i = 0; i < 10; i++) {
+//     int result = N + M * i;
+//     stringResult+='$result ';
 //   }
-//   String printingresult = '';
-//   for (int resul in resultList) {
-//     printingresult += '$resul ';
-//   }
-//   print(printingresult);
+//   print(stringResult.trim());
+//
+//   // int result = N;
+//   // List<int> resultList = [N];
+//   // for (int i = 0; i < 9; i++) {
+//   //   result += M;
+//   //   resultList.add(result);
+//   // }
+//   // String printingresult = '';
+//   // for (int resul in resultList) {
+//   //   printingresult += '$resul';
+//   // }
+//   // print(printingresult);
+//
+//
 // }
 
 // //quiz 3
@@ -48,6 +58,15 @@ import 'dart:io';
 //       print(i);
 //     }
 //   }
+// }
+//
+// //quiz 3-1(선생님 풀이)
+// void main() {
+//   List<int> inputs = [1, 2, 3, 4, 5];
+//   for (int i = 0; i < 4; i++) {
+//     inputs.remove(int.parse(stdin.readLineSync()));
+//   }
+//   print(inputs[0]);
 // }
 
 // //quiz 4
@@ -148,46 +167,197 @@ import 'dart:io';
 //   }
 // }
 
-// //quiz 9
+// // //quiz 8-1(선생님 방법)
 // void main() {
-//   List<String> heightWidth = stdin.readLineSync().split(' ');
-//   int height = int.parse(heightWidth[0]);
-//   int width = int.parse(heightWidth[1]);
+//   String E = stdin.readLineSync();
 //
-//   List<int> whasoList = [];
+//   int ten = E.length - E.replaceAll('<', '').length;
+//   int one = E.length - E.replaceAll('/', '').length;
+//
+//   print(ten * 10 + one);
+// }
+
+//quiz 9
+void main() {
+  List<String> heightWidth = stdin.readLineSync().split(' ');
+  int height = int.parse(heightWidth[0]);
+  int width = int.parse(heightWidth[1]);
+
+  List<int> whasoList = [];
+
+  for (int i = 0; i < height; i++) {
+    List<String> whaso = stdin.readLineSync().split(' ');
+    for (int j = 0; j < whaso.length; j++) {
+      whasoList.add(int.parse(whaso[j]));
+    }
+  }
+
+
+  Exam exam = Exam();
+  List<int> solution = exam.parsing(whasoList);
+  String solution1 = '';
+  for (int j = 0; j < solution.length / width; j++) {
+    for (int i = 0 + j * width; i < solution.length / height + j * width; i++) {
+      solution1 += '${solution[i]} ';
+    }
+    solution1=solution1.trim();
+    solution1+= '\n';
+  }
+  print(solution1.trim());
+}
+
+class Exam {
+  List parsing(List<int> x) {
+    List<int> blackWhiteWhaso = [];
+
+    for (int i = 0; i < x.length; i++) {
+      if (x[i] <= 127) {
+        blackWhiteWhaso.add(0);
+      } else {
+        blackWhiteWhaso.add(1);
+      }
+    }
+    return blackWhiteWhaso;
+  }
+}
+
+// // //quiz 9-1(선생님 방법)
+// void main() {
+//   List<String> inputLine = stdin.readLineSync().split(' ');
+//
+//   int H = int.parse(inputLine[0]);
+//   int W = int.parse(inputLine[1]);
+//
+//   Image image = Image(H, W);
+//
+//   for (int i = 0; i < H; i++) {
+//     // 한줄의 픽셀들
+//     List<Pixel> inputLine = stdin.readLineSync().split(' ').map((e) => Pixel(int.parse(e))).toList();
+//     Row row = Row();
+//     row.pixels = inputLine;
+//     // 한줄을 이미지 정보에 추가
+//     // image.rows.add(row);
+//     image.rows.add(row);
+//   }
+//   print(image.print());
+// }
+//
+//
+//
+//
+//
+// class Image {
+//   int H;
+//   int W;
+//   Image(this.H, this.W);
+//
+//   List<Row> rows = [];
+//
+//   String print() {
+//     String result = '';
+//     for (var row in rows) {
+//       result += '${row.print()}\n';
+//     }
+//     return result;
+//   }
+// }
+//
+// class Row {
+//   List<Pixel> pixels = [];
+//
+//   String print() {
+//     String result = '';
+//     for (var pixel in pixels) {
+//       result += '${pixel.print()} ';
+//     }
+//     return result.trim();
+//   }
+// }
+//
+// class Pixel {
+//   int value;
+//   Pixel(this.value);
+//
+//   String print() {
+//     if (value >= 128) {
+//       return '1';
+//     }
+//     return '0';
+//   }
+// }
+
+// // //quiz 9-2(선생님 방법)
+// void main() {
+//   List<String> inputLine = stdin.readLineSync().split(' ');
+//
+//   int H = int.parse(inputLine[0]);
+//   int W = int.parse(inputLine[1]);
+//
+//   List<List<int>> pixels = [];
+//   for (int i = 0; i < H; i++) {
+//     List<int> inputLine = stdin.readLineSync().split(' ').map((e) => int.parse(e)).toList();
+//     pixels.add(inputLine);
+//   }
+//
+//   for (int i = 0; i < H; i++) {
+//     myPrint(pixels[i]);
+//   }
+//
+// }
+//
+// void myPrint(List<int> oneLine) {
+//   String result = '';
+//   for (int num in oneLine) {
+//     if (num >= 128) {
+//       num = 1;
+//     } else {
+//       num = 0;
+//     }
+//     result += '$num ';
+//   }
+//   print(result);
+// }
+
+// //Quiz 9 연습
+// void main() {
+//   List<int> inputHW =
+//       stdin.readLineSync().split(' ').map((e) => int.parse(e)).toList();
+//
+//   int height = inputHW[0];
+//   int width = inputHW[1];
+//
+//   List<List<int>> pixelList = [];
 //
 //   for (int i = 0; i < height; i++) {
-//     List<String> whaso = stdin.readLineSync().split(' ');
-//     for (int j = 0; j < whaso.length; j++) {
-//       whasoList.add(int.parse(whaso[j]));
-//     }
+//     List<int> inputLine =
+//         stdin.readLineSync().split(' ').map((e) => int.parse(e)).toList();
+//     pixelList.add(inputLine);
 //   }
-//
-//
 //   Exam exam = Exam();
-//   List<int> solution = exam.parsing(whasoList);
-//   String solution1 = '';
-//   for (int j = 0; j < solution.length / width; j++) {
-//     for (int i = 0 + j * width; i < solution.length / height + j * width; i++) {
-//       solution1 += '${solution[i]} ';
-//     }
-//     solution1+= '\n';
-//   }
-//   print(solution1.trim());
+//   exam.parsing(pixelList);
+//   exam.printing(pixelList);
 // }
 //
 // class Exam {
-//   List parsing(List<int> x) {
-//     List<int> blackWhiteWhaso = [];
-//
+//   List<List<int>> parsing(List<List<int>> x) {
 //     for (int i = 0; i < x.length; i++) {
-//       if (x[i] <= 127) {
-//         blackWhiteWhaso.add(0);
-//       } else {
-//         blackWhiteWhaso.add(1);
+//       for (int j = 0; j < x[i].length; j++) {
+//         if (x[i][j] > 128) {
+//           x[i][j] = 1;
+//         }
+//         x[i][j] = 0;
 //       }
 //     }
-//     return blackWhiteWhaso;
+//     return x;
+//   }
+//
+//   String printing(List<List<int>> x) {
+//     for (int i = 0; i < x.length; i++) {
+//       var result='';
+//       for (int j = 0; j < x[i].length; j++) {
+//         result += '${x[i][j]} ';
+//       } print(result.trim());
+//     }
 //   }
 // }
 
