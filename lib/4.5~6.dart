@@ -146,6 +146,7 @@
 // 연습
 
 import 'package:flutter/material.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 void main() {
   runApp(MyApp());
@@ -207,7 +208,12 @@ class _MyAppPageState extends State<MyAppPage> {
   }
 }
 
-class Page1 extends StatelessWidget {
+class Page1 extends StatefulWidget {
+  @override
+  _Page1State createState() => _Page1State();
+}
+
+class _Page1State extends State<Page1> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -219,10 +225,6 @@ class Page1 extends StatelessWidget {
     );
   }
 
-  //이미지로 아이콘 대체
-  //클릭 가능하게
-  //opacity 상태에선 클릭 될까?
-  //showDialog
   Widget _buildTop() {
     return Column(
       children: [
@@ -232,6 +234,7 @@ class Page1 extends StatelessWidget {
             GestureDetector(
               onTap: () {
                 print('클릭 됩니다');
+                _showDialog();
 
               },
               child: Column(
@@ -285,33 +288,49 @@ class Page1 extends StatelessWidget {
   }
 
   Widget _buildMiddle() {
-    return Text('Middle');
+    return CarouselSlider(
+      options: CarouselOptions(height: 400.0),
+      items: [1,2,3,4,5].map((i) {
+        return Builder(
+          builder: (BuildContext context) {
+            return Container(
+                width: MediaQuery.of(context).size.width,
+                margin: EdgeInsets.symmetric(horizontal: 5.0),
+                decoration: BoxDecoration(
+                    color: Colors.amber
+                ),
+                child: Text('text $i', style: TextStyle(fontSize: 16.0),)
+            );
+          },
+        );
+      }).toList(),
+    );
   }
 
   Widget _buildBottom() {
     return Text('Bottom');
   }
 
-  // void _showDialog() {
-  //   showDialog(
-  //     context: context,
-  //     builder: (BuildContext context) {
-  //       // return object of type Dialog
-  //       return AlertDialog(
-  //         title: new Text("Alert Dialog title"),
-  //         content: new Text("Alert Dialog body"),
-  //         actions: <Widget>[
-  //           new FlatButton(
-  //             child: new Text("Close"),
-  //             onPressed: () {
-  //               Navigator.pop(context);
-  //             },
-  //           ),
-  //         ],
-  //       );
-  //     },
-  //   );
-  // }
+  void _showDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: new Text("Alert Dialog title"),
+          content: new Text("Alert Dialog body"),
+          actions: <Widget>[
+            new FlatButton(
+              child: new Text("Close"),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 }
 
 class Page2 extends StatelessWidget {
