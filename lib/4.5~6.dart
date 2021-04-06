@@ -181,7 +181,7 @@ class _MyAppPageState extends State<MyAppPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          '복잡한 UI',
+          'KaKao T',
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
@@ -210,20 +210,156 @@ class _MyAppPageState extends State<MyAppPage> {
 class Page1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Text('1페이지입니다');
+    return Column(
+      children: [
+        _buildTop(),
+        _buildMiddle(),
+        _buildBottom(),
+      ],
+    );
   }
+
+  //이미지로 아이콘 대체
+  //클릭 가능하게
+  //opacity 상태에선 클릭 될까?
+  //showDialog
+  Widget _buildTop() {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            GestureDetector(
+              onTap: () {
+                print('클릭 됩니다');
+
+              },
+              child: Column(
+                children: [Icon(Icons.local_taxi, size: 40), Text('택시')],
+              ),
+            ),
+            Column(
+              children: [
+                Image.network(
+                  'src',
+                  height: 40,
+                  width: 40,
+                  fit: BoxFit.cover,
+                ),
+                Text('택시')
+              ],
+            ),
+            Column(
+              children: [Icon(Icons.local_taxi, size: 40), Text('택시')],
+            ),
+            Column(
+              children: [Icon(Icons.local_taxi, size: 40), Text('택시')],
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 40,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Column(
+              children: [Icon(Icons.local_taxi, size: 40), Text('택시')],
+            ),
+            Column(
+              children: [Icon(Icons.local_taxi, size: 40), Text('택시')],
+            ),
+            Column(
+              children: [Icon(Icons.local_taxi, size: 40), Text('택시')],
+            ),
+            Opacity(
+              opacity: 0.0,
+              child: Column(
+                children: [Icon(Icons.local_taxi, size: 40), Text('택시')],
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildMiddle() {
+    return Text('Middle');
+  }
+
+  Widget _buildBottom() {
+    return Text('Bottom');
+  }
+
+  // void _showDialog() {
+  //   showDialog(
+  //     context: context,
+  //     builder: (BuildContext context) {
+  //       // return object of type Dialog
+  //       return AlertDialog(
+  //         title: new Text("Alert Dialog title"),
+  //         content: new Text("Alert Dialog body"),
+  //         actions: <Widget>[
+  //           new FlatButton(
+  //             child: new Text("Close"),
+  //             onPressed: () {
+  //               Navigator.pop(context);
+  //             },
+  //           ),
+  //         ],
+  //       );
+  //     },
+  //   );
+  // }
 }
 
 class Page2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Text('2페이지입니다');
+    return Column(
+      children: [
+        _buildTop(),
+        _buildMiddle(),
+        _buildBottom(),
+      ],
+    );
+  }
+
+  Widget _buildTop() {
+    return Text('Top');
+  }
+
+  Widget _buildMiddle() {
+    return Text('Middle');
+  }
+
+  Widget _buildBottom() {
+    return Text('Bottom');
   }
 }
 
 class Page3 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Text('3페이지입니다');
+    return Column(
+      children: [
+        _buildTop(),
+        _buildMiddle(),
+        _buildBottom(),
+      ],
+    );
+  }
+
+  Widget _buildTop() {
+    return Text('Top');
+  }
+
+  Widget _buildMiddle() {
+    return Text('Middle');
+  }
+
+  Widget _buildBottom() {
+    return Text('Bottom');
   }
 }
