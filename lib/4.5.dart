@@ -46,7 +46,7 @@
 //     );
 //   }
 // }
-
+//
 // // 2번째 연습 : 어플만들기 연습
 // import 'package:flutter/material.dart';
 //
@@ -60,7 +60,7 @@
 //     return MaterialApp(
 //       debugShowCheckedModeBanner: false,
 //       title: 'kakao project',
-//       theme: ThemeData(primaryColor: Colors.orange),
+//       // theme: ThemeData(primaryColor: Colors.orange),
 //       home: MyAppPage(),
 //     );
 //   }
@@ -95,7 +95,10 @@
 //       body:_page[_index],
 //       bottomNavigationBar: BottomNavigationBar(
 //         items: <BottomNavigationBarItem>[
-//           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+//
+//           // BottomNavigationBarItem(label: 'Home', icon: ImageIcon(AssetImage("assets/bird.png"),size: 200,color: Color(0xFF3A5A98),)),
+//
+//           BottomNavigationBarItem(icon: Icon(Icons.home), label: '홈'),
 //           BottomNavigationBarItem(icon: Icon(Icons.assignment), label: '이용서비스'),
 //           BottomNavigationBarItem(
 //               icon: Icon(Icons.account_circle), label: '내정보'),
@@ -138,8 +141,10 @@
 //     );
 //   }
 // }
+//
 
-import 'package:flutter/cupertino.dart';
+// 연습
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -151,8 +156,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter demo',
-      // theme
+      title: 'FlutterDemo',
+      theme: ThemeData(primaryColor: Colors.blue),
       home: MyAppPage(),
     );
   }
@@ -164,13 +169,12 @@ class MyAppPage extends StatefulWidget {
 }
 
 class _MyAppPageState extends State<MyAppPage> {
-  var _index = 'Hello';
-
-  // List _page = [
-  //   Page1(),
-  //   Page2(),
-  //   Page3(),
-  // ];
+  var _index = 0;
+  List _pageList = [
+    Page1(),
+    Page2(),
+    Page3(),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -178,66 +182,48 @@ class _MyAppPageState extends State<MyAppPage> {
       appBar: AppBar(
         title: Text(
           '복잡한 UI',
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
-        // centerTitle: true,
-        // actions: [IconButton(icon: Icon(Icons.add), onPressed: () {
-        //   setState(() {
-        //     _index++;
-        //   });
-        // })],
+        centerTitle: true,
+        actions: [IconButton(icon: Icon(Icons.add), onPressed: () {})],
       ),
-      body: Text(
-        _index,
-      ),
-      // body: _page[_index],
-      // bottomNavigationBar: BottomNavigationBar(
-      //   onTap: (index) {
-      //     setState(() {
-      //       _index = index;
-      //     });
-      //   },
-      //   items: <BottomNavigationBarItem>[
-      //     BottomNavigationBarItem(icon: Icon(Icons.home), label: '홈'),
-      //     BottomNavigationBarItem(icon: Icon(Icons.assignment), label: '이용서비스'),
-      //     BottomNavigationBarItem(
-      //         icon: Icon(Icons.account_circle), label: '내정보'),
-      //   ],
-      // ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
+      body: _pageList[_index],
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: (index) {
           setState(() {
-            _index = 'World';
+            _index = index;
           });
         },
-        child: IconButton(
-          icon: Icon(Icons.add),
-        ),
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: '홈'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.home_repair_service), label: '이용서비스'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.account_circle), label: '내 정보'),
+        ],
+        currentIndex: _index, //??
       ),
     );
   }
 }
 
-// class Page1 extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Center(child: Text('1페이지입니다'),
-//     );
-//   }
-// }
-//
-// class Page2 extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Center(child: Text('2페이지입니다'),
-//     );
-//   }
-// }
-//
-// class Page3 extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Center(child: Text('3페이지입니다'),
-//     );
-//   }
-// }
+class Page1 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Text('1페이지입니다');
+  }
+}
+
+class Page2 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Text('2페이지입니다');
+  }
+}
+
+class Page3 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Text('3페이지입니다');
+  }
+}
