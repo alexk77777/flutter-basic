@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -12,7 +11,8 @@ void main() async {
 class Todo {
   bool isDone;
   String title;
-  Todo(this.title, {this.isDone=false});
+
+  Todo(this.title, {this.isDone = false});
 }
 
 class MyApp extends StatelessWidget {
@@ -51,22 +51,49 @@ class _TodoListPageState extends State<TodoListPage> {
       ),
       trailing: IconButton(
         icon: Icon(Icons.delete_forever),
-        onPressed: () => _deleteTodo(todo),
+        onPressed: () => _deleteTodo(doc),
       ),
     );
   }
 
   void _addTodo(Todo todo) {
-    setState(() {
-      _items.add(todo);
-      _todoController.text = '';
+    //콜백 또는 promise라고 부름
+    //단점 콜백지옥에 빠질수 있음
+    CollectionReference query = FirebaseFirestore.instance.collection('todo');
+    query.add({
+      'title': todo.title,
+      'isDone': todo.isDone,
+    }).then((_) {
+      setState(() {
+        // _items.add(todo);
+        _todoController.text = '';
+      });
+    }).catchError((error) {
+      //다이얼로그 띄우기
     });
   }
 
-  void _deleteTodo(Todo todo) {
-    setState(() {
-      _items.remove(todo);
-    });
+
+
+
+
+
+
+  // 동기(sync) & 비동기(async)
+  //비동기의 대표 : streambuilder & future
+
+  void _deleteTodo(DocumentSnapshot todo) {
+    CollectionReference query = FirebaseFirestore.instance.collection('todo');
+    query
+        .doc(todo.id)
+        .delete()
+        .then((value) => print('성공'))
+        .catchError((error) => print('실패'));
+
+    //이부분 없어도 잘 돌아갈 듯
+    // setState(() {
+    //   _items.remove(todo);
+    // });
   }
 
   void _toggleTodo(Todo todo) {
@@ -110,22 +137,139 @@ class _TodoListPageState extends State<TodoListPage> {
               ],
             ),
             StreamBuilder<QuerySnapshot>(
-              stream: query.snapshots(),
-              builder: (context, snapshot) {
-                if(!snapshot.hasData){
-                  return CircularProgressIndicator();
-                }
-                final documents = snapshot.data.docs;
-                return Expanded(
-                  child: ListView(
-                    children: documents.map((doc) => _buildItemWidget(doc)).toList(),
-                  ),
-                );
-              }
-            ),
+                stream: query.snapshots(),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) {
+                    return CircularProgressIndicator();
+                  }
+                  final documents = snapshot.data.docs;
+                  return Expanded(
+                    child: ListView(
+                      children: documents
+                          .map((doc) => _buildItemWidget(doc))
+                          .toList(),
+                    ),
+                  );
+                }),
           ],
         ),
       ),
     );
   }
 }
+
+// // 남은 할일 연습
+// import 'package:flutter/material.dart';
+//
+// void main() {
+//   runApp(MyApp());
+// }
+//
+// class Todo {
+//   bool isDone = false;
+//   String title;
+//
+//   Todo(this.title);
+// }
+//
+// class MyApp extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       debugShowCheckedModeBanner: false,
+//       title: 'Flutter Project',
+//       theme: ThemeData(primarySwatch: Colors.blue),
+//       home: TodoListPage(),
+//     );
+//   }
+// }
+//
+// class TodoListPage extends StatefulWidget {
+//   @override
+//   _TodoListPageState createState() => _TodoListPageState();
+// }
+//
+// class _TodoListPageState extends State<TodoListPage> {
+//   final _items = <Todo>[];
+//   var _todoController = TextEditingController();
+//
+//   void _addTodo(Todo todo) {
+//     setState(() {
+//       _items.add(todo);
+//       _todoController.text = '';
+//     });
+//   }
+//
+//   void _deleteTodo(Todo todo) {
+//     setState(() {
+//       _items.remove(todo);
+//     });
+//   }
+//
+//   void _toggleTodo(Todo todo) {
+//     setState(() {
+//       todo.isDone = !todo.isDone;
+//     });
+//   }
+//
+//
+//   Widget _buildItemWidget(Todo todo) {
+//     return ListTile(
+//       onTap: () {
+//         _toggleTodo(todo);
+//       },
+//       title: Text(
+//         todo.title,
+//         style: todo.isDone
+//             ? TextStyle(
+//           decoration: TextDecoration.lineThrough,
+//           fontStyle: FontStyle.italic,
+//         )
+//             : null,
+//       ),
+//       trailing: IconButton(
+//         icon: Icon(Icons.delete_forever),
+//         onPressed: () {_deleteTodo(todo);},
+//       ),
+//     );
+//   }
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text(
+//           '남은 할 일',
+//           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+//         ),
+//         centerTitle: true,
+//       ),
+//       body: Padding(
+//         padding: const EdgeInsets.all(8.0),
+//         child: Column(
+//           children: [
+//             Row(
+//               children: [
+//                 Expanded(
+//                   child: TextField(
+//                     controller: _todoController,
+//                   ),
+//                 ),
+//                 RaisedButton(
+//                   onPressed: () {
+//                     _addTodo(Todo(_todoController.text));
+//                   },
+//                   child: Text('추가'),
+//                 )
+//               ],
+//             ),
+//             Expanded(
+//                 child: ListView(
+//                     children:
+//                         _items.map((todo) => _buildItemWidget(todo)).toList()))
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
