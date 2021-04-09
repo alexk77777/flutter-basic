@@ -39,7 +39,7 @@ class _TodoListPageState extends State<TodoListPage> {
   Widget _buildItemWidget(DocumentSnapshot doc) {
     final todo = Todo(doc['title'], isDone: doc['isDone']);
     return ListTile(
-      onTap: () => _toggleTodo(todo),
+      onTap: () => _toggleTodo(doc),
       title: Text(
         todo.title,
         style: todo.isDone
@@ -56,31 +56,54 @@ class _TodoListPageState extends State<TodoListPage> {
     );
   }
 
-  void _addTodo(Todo todo) {
+  //방법 1번
+  // void _addTodo(Todo todo) {
+  //   //콜백 또는 promise라고 부름
+  //   //단점 콜백지옥에 빠질수 있음
+  //   CollectionReference query = FirebaseFirestore.instance.collection('todo');
+  //   query.add({
+  //     'title': todo.title,
+  //     'isDone': todo.isDone,
+  //   }).then((_) {
+  //     setState(() {
+  //       // _items.add(todo);
+  //       _todoController.text = '';
+  //     });
+  //   }).catchError((error) {
+  //     //다이얼로그 띄우기
+  //   });
+  // }
+  // 동기(sync) & 비동기(async)
+  //비동기의 대표 : streambuilder & future
+
+  //add 방법 2번 (Future async await 방식)
+  Future<void> _addTodo(Todo todo) async {
     //콜백 또는 promise라고 부름
     //단점 콜백지옥에 빠질수 있음
     CollectionReference query = FirebaseFirestore.instance.collection('todo');
-    query.add({
+    DocumentReference value = await query.add({
       'title': todo.title,
       'isDone': todo.isDone,
-    }).then((_) {
-      setState(() {
-        // _items.add(todo);
-        _todoController.text = '';
-      });
-    }).catchError((error) {
-      //다이얼로그 띄우기
+    });
+
+    setState(() {
+      // _items.add(todo);
+      _todoController.text = '';
     });
   }
 
-
-
-
-
-
-
-  // 동기(sync) & 비동기(async)
-  //비동기의 대표 : streambuilder & future
+  // Map<String, dynamic> 대신 var를 사용함
+//     var data = {
+//       'title': todo.title,
+//       'isDone': todo.isDone,
+//     };
+//
+//   await query.add(data);
+//   setState(() {
+//   // _items.add(todo);
+//   _todoController.text = '';
+//   });
+// }
 
   void _deleteTodo(DocumentSnapshot todo) {
     CollectionReference query = FirebaseFirestore.instance.collection('todo');
@@ -96,11 +119,24 @@ class _TodoListPageState extends State<TodoListPage> {
     // });
   }
 
-  void _toggleTodo(Todo todo) {
-    setState(() {
-      todo.isDone = !todo.isDone;
-    });
-  }
+  void _toggleTodo(DocumentSnapshot todo) {
+    CollectionReference query = FirebaseFirestore.instance.collection('todo');
+    query
+        .doc(todo.id)
+        .update({'isDone':!todo['isDone']})
+        .then((value) => print("User Updated"))
+        .catchError((error) => print("Failed"));}
+
+
+
+    // FirebaseFirestore.instance.collection('todo').document(doc.documentID).updateData({
+    //   'isDone':!doc['isDone'],
+    // });}
+
+  //   setState(() {
+  //     todo.isDone = !todo.isDone;
+  //   });
+  // }
 
   @override
   void dispose() {
